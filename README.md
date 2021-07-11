@@ -1,47 +1,48 @@
 ## The World is ours! 🌎
 
-В этом задании тебе предстоит спроектировать и заполнить записями базу данных, содержащую информацию о странах и городах мира. База даных должна соответствовать всем современным требованиям, быть достаточно гибкой и не страдать от избыточности данных. Не забывай, что реляционные БД подчиняются законам логики из обычного мира!
+In this task, you have to design and fill a database containing information about the world's countries and cities. The database should meet all modern requirements, be flexible, and not redundant. Don't forget that relational databases obey real-world logic!
 
-### R0: Инфологическое проектирование
-Подумай, какие сущности ты будешь хоранить в базе данных. Для того, чтобы из базы можно было извлечь конечный адрес, как минимум в ней должны присутствовать такие сущности как _Страна_, _Город_, _Улица_. Подумай, какие таблицы тебе понадобятся для хранения этих сущностей, и какая информация будет хранитьс я в этих таблицах. Как они будут связаны между собой. 
+### R0: Infological design
 
-### R1: Построение ER-диаграммы
-Чтобы наглядно видеть, какие сущности будут храниться в БД и как они будут между собой связаны, построй диаграмму отношений (Entity Relationship Diagram).
+Think about which entities you will store in the database. To extract a final address from the database, you will need a few entities: _Country_, _City_, and _Street_. Think about what tables you'll need for storing these entities and what information they will contain. How will they relate to one another?
+
+### R1: Building an ER diagram
+Create an Entity Relationship Diagram to visualize which entities you will store in the database and how they will relate to each other.
 
 ### R1: DDL
-Используя команды DDL создай структуру свой базы данных согласно диаграмме из релиза #1. Не забывай про внешние ключи. База данных должна быть спроектирована таким образом, чтобы нельзя было удалить страну, в которой есть города, но при этом она может сменить свое название или любые другие атрибуты (кроме первичного ключа). При имзменении названия страны, города, которые в ней находятся, не должны потеряться, они должны по-прежнему отсаваться в этой стране. При этом, город можно переместить в другую страну, как бы странно это ни звучало🙂  
-  В двух разных городах могут быть улицы с одинаковыми названиями, но _это разные улицы!_ Если город перестает существовать, то удаляются и все улицы, которые в нем находились. За это должен отвечать соответствующий внешний ключ. 
+Using DDL commands and your diagram from release # 1, create a database structure. Don't forget about external keys. The database's design shouldn't allow you to delete a country with existing cities, but it could allow you to change its name (or other attributes excluding the primary key). After changing the country name, its cities should remain. You should also be able to move a city to another country, no matter how strange it may sound. 🙂 
+There may be some homonymous streets in different cities, but they are, in fact, _different streets!_ If a city ceases to exist, then all its streets should also disappear. The corresponding external key is responsible for this. 
+### R2: Create your own planet with cities and countries 😎
+Use the [INSERT](https://postgrespro.ru/docs/postgresql/13/dml-insert) (rus) command to fill your database with data. Make 5-10 countries and cities; you can have more streets, but don't get carried away since this isn't the end of the assignment!
 
-### R2: Создай свою планету с городами и странами 😎
+### R3: Getting data
+1. Try to output the following from the database:
+2. List of countries
+3. List of cities
+4. List of streets
+5. All countries that have cities
 
-Заполни БД своими данными! Используй команду [INSERT](https://postgrespro.ru/docs/postgresql/13/dml-insert) для этого. Сделай по 5-10 стран и городов, улиц может быть больше, но не увлекайся, на этом задание не заканчивается!
+6. All countries without cities
+7. All cities of a specific country
+8. All streets in the first city
+9. All streets in the largest city [Hint](#help)
+10. All streets in the largest country's largest city [Tip](#help)
+11. All streets in the largest city of the largest country containing the letter "E" in its name
+12. And finally, all addresses in the "street, city, country" format
 
-### R3: Получение данных
-Попробуй вывести из базы данных:
-1. Список стран
-1. Список городов
-1. Список улиц
-1. Все страны, в которых есть города
-1. Все страны, в которых нет городов
-1. Все города определенной страны
-1. Все улицы в первом городе
-1. Все улицы в самом большом городе [Подсказка](#help)
-1. Все улицы в самом большом городе самой большой страны [Подсказка](#help)
-1. Все улицы в самом большом городе самой большой страны, название которых содержит букву "Е"
-1. И, наконец, все адреса в формате "Название улицы, название города, насзвание страны"
+### R4: Whoops looks like something went wrong 🙀
 
-### R4: Whoops, looks like something went wrong 🙀
-Что-то пошло не так? Что-то не выводится? Связи нарушились? Не беда! В этом вымышленном мире мы можем все изменить одной командой! Ну, или несколькими🙂
-С помощью команды [UPDATE](https://postgrespro.ru/docs/postgresql/13/dml-update) ты можешь поменять любые данные в своей БД, если ты где-то опечатался или просто захотел что-то изменить. Но не забывай про условие [WHERE](https://postgrespro.ru/docs/postgresql/13/queries-table-expressions#QUERIES-WHERE), иначе ты рискуешь поменять все записи в таблице. Хорошим тоном считается обновление по первичному ключу в условии. Ты можешь достать ключ с помощью отдельного запроса или вложенного, и поставить его в условие WHERE для команды UPDATE.   
-  Если тебе показалось, что что-то не так со схемой БД или ты решил внести изменения в структуру таблиц, тебе поможет в этом команда [ALTER](https://postgrespro.ru/docs/postgresql/13/ddl-alter)
+Did something go wrong? Are you missing something? Are the connections broken? No problemo! In this fictional world, we can change everything with one command! Well, if not one, then, several 🙂 If you typed a mistake somewhere or just wanted to change something, you can use the [UPDATE](https://postgrespro.ru/docs/postgresql/13/dml-update) (rus) command to change any piece of data in the database. Also, don't forget about the [WHERE](https://postgrespro.ru/docs/postgresql/13/queries-table-expressions#QUERIES-WHERE) (rus) clause if you don't want to risk changing all data. It's considered good practice to update using the primary key, which you can access via a separate query. You can also nest the query into the WHERE clause of the UPDATE command.
 
-### R5: Они нас вычислили! Заметаем следы!
-Сотрудники ЦРУ как-то узнали, что мы создали свой мир со своими городами и странами, и им это не нравится! Все данные нужно срочно удалить! Очисти все таблицы командой [TRUNCATE](https://postgrespro.ru/docs/postgresql/13/sql-truncate). Убедись, что данные стерты, попробуй что-нибудь вывести из таблиц. Ничего не выводится? Хорошо. Теперь удали все таблицы, а затем и базу данных.  
-Всё чисто? Отлично! Ты справился!  
+If you think something is wrong with the database schema or decided to restructure the data, you may find the [ALTER](https://postgrespro.ru/docs/postgresql/13/ddl-alter) command helpful.
 
-На этом пока всё, но помни, если ты в чем-то сомневаешься или забыл нужную SQL-команду, скорее всего ответ на твой вопрос знает [официальная документация](https://postgrespro.ru/docs/postgresql/13/index).  
-Чего же ты ждешь? Открывай документацию в отдельной вкладке и приступай к следующему заданию!
+### R5: They're onto us! We need to cover our tracks!
+CIA officers somehow discovered our made-up world, and they aren't loving it! All data requires urgent extermination! Clear all tables with the [TRUNCATE](https://postgrespro.ru/docs/postgresql/13/sql-truncate) (rus) command. Ensure that you erased everything by attempting to output something from the tables. If nothing appears, time to delete all tables and, finally, the database.
+All done? Excellent! You did it!
 
-<a name="help"><h2>Подсказки</h2></a>
-Самым большим городом является тот, в котором больше всего улиц  
-Самой большой страной является та, в которой больше всего городов  
+That's all for now! If you ever have any questions regarding SQL commands, check the [official documentation](https://postgrespro.ru/docs/postgresql/13/index) (rus).
+What are you waiting for? Time to open the documentation and proceed to the next assignment!
+
+<a name="help"><h2>Hints</h2></a>
+The largest city is the one with the most streets
+The largest country is the one with the most cities
